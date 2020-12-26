@@ -1,10 +1,17 @@
-import React from 'react';
-import styles from './summoner.less';
+import React, { FC } from 'react';
+import styles from './item.less';
+import { connect, SummonerModelState, ConnectProps } from 'umi';
 
-export default () => {
+interface PageProps extends ConnectProps {
+  summoner: SummonerModelState;
+}
+
+const Summoner: FC<PageProps> = (props) => {
   return (
     <div>
-      <h1 className={styles.title}>Page summoner</h1>
+      <h2>this id {props.summoner.name}</h2>
     </div>
-  );
+  )
 }
+
+export default connect(({ summoner } : { summoner: SummonerModelState }) => ({ summoner }))(Summoner)

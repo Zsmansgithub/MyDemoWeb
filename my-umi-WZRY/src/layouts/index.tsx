@@ -1,10 +1,19 @@
 import React from 'react';
 import { Layout, Menu } from 'antd';
+import { Link } from 'umi';
+
+import styles from './index.less';
 
 const { Header, Content, Footer } = Layout;
-import styles from './index.less'
+const menuData = [
+  {route: '/hero', name: '英雄'},
+  {route: '/item', name: '局内道具'},
+  {route: '/summoner', name: '召唤师技能'},
+]
 // function BasicLayout(props: { children: React.ReactNode; }) {
 function BasicLayout(props: any) {
+  const location = props.location;
+  const pathname = location.pathname;
   return (
     <Layout>
       <Header>
@@ -12,12 +21,15 @@ function BasicLayout(props: any) {
         <Menu
           theme="dark"
           mode="horizontal"
-          defaultSelectedKeys={['1']}
+          defaultSelectedKeys={[pathname]}
           style={{ lineHeight: '64px' }}
         >
-          <Menu.Item key="1">英雄</Menu.Item>
-          <Menu.Item key="2">局内道具</Menu.Item>
-          <Menu.Item key="3">召唤师技能</Menu.Item>
+          {/*<Menu.Item key="/hero"><Link to="hero">英雄</Link></Menu.Item>*/}
+          {/*<Menu.Item key="/item"><Link to="item">局内道具</Link></Menu.Item>*/}
+          {/*<Menu.Item key="/summoner"><Link to="summoner">召唤师技能</Link></Menu.Item>*/}
+          {menuData.map((menu) => {
+            return <Menu.Item key={`${menu.route}`}><Link to={`${menu.route}`}>{menu.name}</Link></Menu.Item>
+          })}
         </Menu>
       </Header>
       <Content style={{ padding: '0 50px' }}>
