@@ -1,8 +1,14 @@
 import { Effect, Reducer, Subscriptions, request } from 'umi';
-export interface SummonerModelState {
-  name: String;
-}
 
+interface summonerProps {
+  summoner_description: string,
+  summoner_id: number,
+  summoner_name: string,
+  summoner_rank: string
+}
+export interface SummonerModelState {
+  summoners: summonerProps[]
+}
 export interface SummonerModelType {
   namespace: 'summoner';
   state: SummonerModelState;
@@ -22,7 +28,7 @@ const SummonerModel: SummonerModelType = {
   namespace: 'summoner',
 
   state: {
-    summoner: []
+    summoners: []
   },
 
   effects: {
@@ -30,16 +36,12 @@ const SummonerModel: SummonerModelType = {
 
     },
     *fetchSummoner({ payload, type }, { call, put, select }) {
-      const data = yield request('/summoner.json')
-      const localData = [
-        {
-          summoner: 'sum'
-        }
-      ];
+      const data = yield request('/web201605/js/summoner.json')
+      const localData = [];
       yield put({
         type: 'save',
         payload: {
-          summoner: data
+          summoners: data || localData
         }
       })
     }

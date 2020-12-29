@@ -1,6 +1,15 @@
 import { Effect, Reducer, Subscription, request } from 'umi';
+interface itemProps {
+  des1: string,
+  item_id: number,
+  item_name: string,
+  item_type: number,
+  price: number,
+  total_price: number
+}
 export interface ItemModelState {
-  name: String;
+  items: itemProps[];
+  filterKey: number;
 }
 
 export interface ItemModelType {
@@ -23,6 +32,7 @@ const ItemModel: ItemModelType = {
 
   state: {
     items: [],
+    filterKey: 0
   },
 
   effects: {
@@ -30,21 +40,14 @@ const ItemModel: ItemModelType = {
 
     },
     *fetchItem({ type, payload }, { call, put, select }) {
-      const data = yield request('/item.json', {
-        method: "POST",
-        body: JSON.stringify({a: 111})
-      })
-     const localData = [
-       {
-         name: 'item'
-       }
-     ];
-     yield put({
-       type: 'save',
-       payload: {
-         items: data
-       }
-     })
+       const data = yield request('/web201605/js/item.json')
+       const localData = [];
+       yield put({
+         type: 'save',
+         payload: {
+           items: data
+         }
+       })
     }
   },
   reducers: {

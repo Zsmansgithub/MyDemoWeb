@@ -13,13 +13,13 @@ export default defineConfig({
   //     "pathRewrite": { "" : "" }
   //   }
   // },
-  // "proxy": {
-  //   "/api": {
-  //     "target": "https://pvp.qq.com",
-  //     "changeOrigin": true,
-  //     "pathRewrite": { "^/api" : "" }
-  //   }
-  // },
+  "proxy": {
+    "/api": {
+      "target": "https://pvp.qq.com",
+      "changeOrigin": true,
+      "pathRewrite": { "^/api" : "" }
+    }
+  },
   // umi cli 默认路由配置
   // routes: [
   //   { path: '/', component: '@/pages/index' },

@@ -1,6 +1,16 @@
 import { Effect, Reducer, Subscription, request } from 'umi';
+
+interface HeroProps {
+  ename: number;
+  cname: string;
+  title: string;
+  new_type: number;
+  hero_type: number;
+  skin_name: string;
+}
 export interface HeroModelState {
-  name: String;
+  heros: HeroProps[];
+  filterKey: number;
 }
 
 export interface HeroModelType {
@@ -23,8 +33,8 @@ const HeroModel: HeroModelType = {
   namespace: 'hero',
 
   state: {
-    name: 'hero',
-    heros: []
+    heros: [],
+    filterKey: 0
   },
 
   effects: {
@@ -32,13 +42,13 @@ const HeroModel: HeroModelType = {
 
     },
     *fetchHeros({ type, payload }, { call, put, select }) {
-      // const data = yield request('/web201605/js/herolist.json');
-      const data = yield request('/herodetails.json', {
-        method: 'POST',
-        body: JSON.stringify({
-          ename: 110,
-        }),
-      });
+      const data = yield request('/web201605/js/herolist.json');
+      // const data = yield request('/herodetails.json', {
+      //   method: 'POST',
+      //   body: JSON.stringify({
+      //     ename: 110,
+      //   }),
+      // });
       const localData = [
         {
           ename: 105,
