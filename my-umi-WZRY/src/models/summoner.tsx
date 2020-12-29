@@ -1,4 +1,4 @@
-import { Effect, Reducer } from 'umi';
+import { Effect, Reducer, Subscriptions, request } from 'umi';
 export interface SummonerModelState {
   name: String;
 }
@@ -8,9 +8,13 @@ export interface SummonerModelType {
   state: SummonerModelState;
   effects: {
     query: Effect;
+    fetchSummoner: Effect;
   };
   reducers: {
     save: Reducer<SummonerModelState>;
+  },
+  subscriptions: {
+    setup: Subscriptions
   }
 }
 
@@ -18,12 +22,26 @@ const SummonerModel: SummonerModelType = {
   namespace: 'summoner',
 
   state: {
-    name: 'summoner',
+    summoner: []
   },
 
   effects: {
     *query({ payload }, { call, put }) {
 
+    },
+    *fetchSummoner({ payload, type }, { call, put, select }) {
+      const data = yield request('/summoner.json')
+      const localData = [
+        {
+          summoner: 'sum'
+        }
+      ];
+      yield put({
+        type: 'save',
+        payload: {
+          summoner: data
+        }
+      })
     }
   },
   reducers: {
@@ -32,6 +50,17 @@ const SummonerModel: SummonerModelType = {
         ...state,
         ...action.payload
       }
+    }
+  },
+  subscriptions: {
+    setup({ history, dispatch }) {
+      return history.listen(({ pathname, query }) => {
+        if(pathname === '/summoner') {
+          dispatch({
+            type: 'fetchSummoner'
+          })
+        }
+      })
     }
   }
 }

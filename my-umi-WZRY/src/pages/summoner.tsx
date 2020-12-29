@@ -10,6 +10,7 @@ const Summoner: FC<PageProps> = (props) => {
   return (
     <div>
       <h2>this id {props.summoner.name}</h2>
+      <div>{JSON.stringify(props.summoner)}</div>
     </div>
   )
 }

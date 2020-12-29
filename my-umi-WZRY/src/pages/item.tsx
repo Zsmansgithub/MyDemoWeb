@@ -10,6 +10,7 @@ const Item: FC<PageProps> = (props) => {
   return (
     <div>
       <h2>this id {props.item.name}</h2>
+      <div>{JSON.stringify(props.item)}</div>
     </div>
   )
 }

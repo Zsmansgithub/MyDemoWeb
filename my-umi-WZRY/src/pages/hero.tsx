@@ -11,6 +11,7 @@ const Hero: FC<PageProps> = (props) => {
     <div>
       {/*<h1 className={styles.title}>Page hero</h1>*/}
       <h2>this is { props.hero.name }</h2>
+      <div>{JSON.stringify(props.hero)}</div>
     </div>
   )
 }
