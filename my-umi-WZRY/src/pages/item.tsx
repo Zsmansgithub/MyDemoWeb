@@ -16,7 +16,7 @@ const itemType = [
 ];
 const Item: FC<PageProps> = ({item, dispatch}) => {
   const { items = [], filterKey = 0 } = item;
-  const onchange = (e) => {
+  const onchange = (e: { target: { value: number; }; }) => {
     dispatch!({type: 'item/save', payload: {
         filterKey: e.target.value
       }})

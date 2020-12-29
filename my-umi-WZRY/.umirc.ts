@@ -1,10 +1,24 @@
 import { defineConfig } from 'umi';
 
 export default defineConfig({
+  plugins: [
+    [
+      'umi-plugin-react',
+      {
+        dva: {
+          immer: true
+        }
+      }
+    ]
+  ],
   nodeModulesTransform: {
     type: 'none',
   },
-  dva: {},
+  dva: {
+    {
+      immer: true
+    }
+  },
   antd: {},
   // "proxy": {
   //   "/": {

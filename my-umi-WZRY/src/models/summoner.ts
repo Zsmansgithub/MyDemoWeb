@@ -24,6 +24,7 @@ export interface SummonerModelType {
   }
 }
 
+// @ts-ignore
 const SummonerModel: SummonerModelType = {
   namespace: 'summoner',
 
@@ -37,7 +38,7 @@ const SummonerModel: SummonerModelType = {
     },
     *fetchSummoner({ payload, type }, { call, put, select }) {
       const data = yield request('/web201605/js/summoner.json')
-      const localData = [];
+      const localData: never[] = [];
       yield put({
         type: 'save',
         payload: {
@@ -56,7 +57,7 @@ const SummonerModel: SummonerModelType = {
   },
   subscriptions: {
     setup({ history, dispatch }) {
-      return history.listen(({ pathname, query }) => {
+      return history.listen(({ pathname }) => {
         if(pathname === '/summoner') {
           dispatch({
             type: 'fetchSummoner'
