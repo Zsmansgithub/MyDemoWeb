@@ -1,7 +1,8 @@
 import { ResponseError } from 'umi-request';
 
 export const request = {
-  prefix: '/api',
+  // prefix: '/api',
+  prefix: '/mockapi',
   headers: {
     Accept: 'application/json',
     'Content-Type': 'application/json; charset=utf-8',

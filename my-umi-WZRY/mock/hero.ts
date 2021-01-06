@@ -852,11 +852,10 @@ const herolist = [
   { 'ename': 528, 'cname': '澜', 'title': '鲨之猎刃', 'new_type': 1, 'hero_type': 4, 'skin_name': '鲨之猎刃' },
 ];
 export default {
-  'GET /api/web201605/js/herolist.json': herolist,
-  'POST /api/herodetails.json': (req, res) => {
-    const { ename } = req.body;
-    console.log(ename)
-    const hero = herolist.filter(item => item.ename === parseInt(ename, 10))[0];
-    res.send(hero);
-  },
+  'GET /mockapi/web201605/js/herolist.json': herolist,
+  // 'POST /mockapi/herodetails.json': (req, res) => {
+  //   const { ename } = req.body;
+  //   const hero = herolist.filter(item => item.ename === parseInt(ename, 10))[0];
+  //   res.send(hero);
+  // },
 };

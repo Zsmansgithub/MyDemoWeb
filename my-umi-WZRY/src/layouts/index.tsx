@@ -1,6 +1,7 @@
 import React from 'react';
 import { Layout, Menu } from 'antd';
 import { Link } from 'umi';
+import { Redirect } from 'umi';
 
 import styles from './index.less';
 
@@ -14,6 +15,9 @@ const menuData = [
 function BasicLayout(props: any) {
   const location = props.location;
   const pathname = location.pathname;
+  if(pathname === '/') {
+    return <Redirect to="/hero" />
+  }
   return (
     <Layout>
       <Header>
@@ -24,9 +28,6 @@ function BasicLayout(props: any) {
           defaultSelectedKeys={[pathname]}
           style={{ lineHeight: '64px' }}
         >
-          {/*<Menu.Item key="/hero"><Link to="hero">英雄</Link></Menu.Item>*/}
-          {/*<Menu.Item key="/item"><Link to="item">局内道具</Link></Menu.Item>*/}
-          {/*<Menu.Item key="/summoner"><Link to="summoner">召唤师技能</Link></Menu.Item>*/}
           {menuData.map((menu) => {
             return <Menu.Item key={`${menu.route}`}><Link to={`${menu.route}`}>{menu.name}</Link></Menu.Item>
           })}
