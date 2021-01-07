@@ -31,16 +31,16 @@ export default defineConfig({
     }
   },
   umi cli 默认路由配置
-  routes: [
-    {
-      path: '/',
-      component: '@/layouts/index',
-      routes: [
-        // { path: '/', redirect: '/hero' },
-        { path: '/hero', component: '@/pages/hero' },
-        { path: '/item', component: '@/pages/item' },
-        { path: '/summoner', component: '@/pages/summoner' },
-      ]
-    }
-  ],
+  // routes: [
+  //   {
+  //     path: '/',
+  //     component: '@/layouts/index',
+  //     routes: [
+  //       // { path: '/', redirect: '/hero' },
+  //       { path: '/hero', component: '@/pages/hero' },
+  //       { path: '/item', component: '@/pages/item' },
+  //       { path: '/summoner', component: '@/pages/summoner' },
+  //     ]
+  //   }
+  // ],
 });
