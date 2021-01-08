@@ -1,6 +1,5 @@
 import React, { FC } from 'react';
 import styles from './summoner.less';
-console.log(styles);
 import { connect, SummonerModelState, ConnectProps } from 'umi';
 import { Row, Col } from 'antd';
 

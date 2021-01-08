@@ -2,6 +2,8 @@ import React, { FC } from 'react';
 import styles from './hero.less';
 import { connect, HeroModelState, ConnectProps } from 'umi';
 import { Row, Col, Radio, Card } from 'antd';
+import FreeHeroItem from './components/heroItem';
+
 interface PageProps extends ConnectProps {
   hero: HeroModelState;
 }
@@ -16,14 +18,40 @@ const heroType = [
 ];
 
 const Hero: FC<PageProps> = ({ hero, dispatch }) => {
-  const { heros = [], filterKey = 0 } = hero;
-  const onChange = (e) => {
-    dispatch({type:"hero/save",payload:{
-             filterKey:e.target.value
-       }})
+  const { heros = [], filterKey = 0, freeheros = [], itemHover = 0 } = hero;
+  const onChange = (e: any) => {
+    dispatch && dispatch({type:"hero/save", payload:{
+            filterKey:e.target.value
+      }})
+  }
+  const onItemHover= (e: any) =>{
+    dispatch && dispatch({
+      type: 'hero/save',
+      payload: {
+        itemHover: e
+      },
+    });
   }
   return (
-    <div>
+    <div className={styles.normal}>
+      <div className={styles.info}>
+        <Row className={styles.freehero}>
+          <Col span={24}>
+            <p>周免英雄</p>
+            <div>
+              {freeheros.map((data, index) => (
+                <FreeHeroItem
+                  data={data}
+                  itemHover={itemHover}
+                  onItemHover={onItemHover}
+                  thisIndex={index}
+                  key={index}
+                />
+              ))}
+            </div>
+          </Col>
+        </Row>
+      </div>
       <Card className={styles.radioPanel}>
         <Radio.Group onChange={onChange} value={filterKey}>
           {heroType.map((item) => (
@@ -46,14 +74,6 @@ const Hero: FC<PageProps> = ({ hero, dispatch }) => {
         ))}
       </Row>
     </div>
-    // <Row>
-    //   {heros.map(item => (
-    //     <Col key={item.ename} span={3} className={styles.heroitem} >
-    //       <img src="`https://game.gtimg.cn/images/yxzj/img201606/heroimg/${item.ename}/${item.ename}.jpg`"/>
-    //       <p>{item.cname}</p>
-    //     </Col>
-    //   ))}
-    // </Row>
   )
 }
 
