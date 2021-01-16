@@ -8,6 +8,7 @@ import styles from './index.less';
 const { Header, Content, Footer } = Layout;
 const menuData = [
   {route: '/hero', name: '英雄'},
+  {route: '/hero1', name: '英雄1'},
   {route: '/item', name: '局内道具'},
   {route: '/summoner', name: '召唤师技能'},
 ]
