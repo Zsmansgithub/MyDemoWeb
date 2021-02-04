@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import styles from './hero.less';
-import { connect, HeroModelState, ConnectProps } from 'umi';
+import { connect, HeroModelState, ConnectProps, Link } from 'umi';
 import { Row, Col, Radio, Card } from 'antd';
 import FreeHeroItem from './components/heroItem';
 
@@ -32,23 +32,27 @@ const Hero: FC<PageProps> = ({ hero, dispatch }) => {
       },
     });
   }
+  const id = '123';
   return (
     <div className={styles.normal}>
       <div className={styles.info}>
         <Row className={styles.freehero}>
           <Col span={24}>
             <p>周免英雄</p>
-            <div>
-              {freeheros.map((data, index) => (
-                <FreeHeroItem
-                  data={data}
-                  itemHover={itemHover}
-                  onItemHover={onItemHover}
-                  thisIndex={index}
-                  key={index}
-                />
-              ))}
-            </div>
+            {/* <Link to={{pathname: 'heroDetail', params: {id: id}}}> */}
+            <Link to={`/heroDetail/${id}`}>
+              <div>
+                {freeheros.map((data, index) => (
+                  <FreeHeroItem
+                    data={data}
+                    itemHover={itemHover}
+                    onItemHover={onItemHover}
+                    thisIndex={index}
+                    key={index}
+                  />
+                ))}
+              </div>
+            </Link>
           </Col>
         </Row>
       </div>

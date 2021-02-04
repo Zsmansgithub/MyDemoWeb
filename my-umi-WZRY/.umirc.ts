@@ -53,14 +53,16 @@ export default defineConfig({
       routes: [
         // { path: '/', redirect: '/hero' },
         { path: '/hero', component: '@/pages/hero/hero' },
+        // { path: '/heroDetail/[id]', component: '@/pages/hero/heroDetail' },
+        { path: '/herodetail/:id', component: '@/pages/hero/[heroDetail]' },
         { path: '/hero1', component: '@/pages/hero1/hero' },
         { path: '/item', component: '@/pages/item/item' },
-        { path: '/summoner', component: '@/pages/summoner/summoner' },
+        { path: '/summoner', component: '@/pages/summoner/summoner' }
       ]
     }
-  ],
+  ]
 });
-
+ssr: {}
 // const path = require('path');
 // // ref: https://umijs.org/config/
 // export default {

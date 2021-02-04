@@ -10,12 +10,13 @@ const menuData = [
   {route: '/hero', name: '英雄'},
   {route: '/hero1', name: '英雄1'},
   {route: '/item', name: '局内道具'},
-  {route: '/summoner', name: '召唤师技能'},
+  {route: '/summoner', name: '召唤师技能'}
 ]
 // function BasicLayout(props: { children: React.ReactNode; }) {
 function BasicLayout(props: any) {
   const location = props.location;
   const pathname = location.pathname;
+  console.log(props)
   if(pathname === '/') {
     return <Redirect to="/hero" />
   }
