@@ -1,9 +1,9 @@
 const dashboard = [
     // { path: '/', redirect: '/hero' },
-    { 
-        path: '/dasboard',
+    {
+        path: '/dashboard',
         component: '@/pages/dasboard/index',
-        name: 'pyy-首页'
+        title: '首页'
     },
 ]
 export default dashboard

@@ -1,8 +1,8 @@
 import React from 'react';
 import { Layout, Menu } from 'antd';
-import { Link } from 'umi';
-import { Redirect } from 'umi';
+import { Redirect, Link, getDvaApp } from 'umi';
 import UserHeader from './components/header/header';
+import TagsView from './components/tags/tags';
 
 import styles from './index.less';
 
@@ -11,17 +11,17 @@ const { SubMenu } = Menu;
 
 const menuData = [
   {
-    route: '',
-    name: 'dashboard', 
+    path: '',
+    title: 'dashboard',
     children: [
-      {route: '/dashboard', name: 'dashboard'},
+      {path: '/dashboard', title: 'dashboard'},
     ]
   },
   {
-    route: '',
-    name: '基础表格',
+    path: '',
+    title: '基础表格',
     children: [
-      {route: '/tableDef', name: '基础表格'},
+      {path: '/tableDef', title: '基础表格'},
     ]
   },
 ]
@@ -29,15 +29,18 @@ function menuList(menus: any) {
   if(!(menus && menus instanceof Array)) {
     return (<></>)
   }
+  const addTag = (menu: any) => {
+      getDvaApp()._store.dispatch({type:"tagsview/addTags", payload: menu})
+  }
   return (
     <>
       {menus.map((menu) => {
         if(menu.children?.length) {
-          return <SubMenu key={`sub_${menu.name}`} title={menu.name}>
+          return <SubMenu key={`sub_${menu.title}`} title={menu.title}>
             {menuList(menu.children)}
           </SubMenu>
         } else {
-          return <Menu.Item key={`menu_${menu.route}`}><Link to={`${menu.route}`}>{menu.name}</Link></Menu.Item>
+          return <Menu.Item key={`menu_${menu.path}`} onClick={() => addTag(menu)}><Link to={`${menu.path}`}>{menu.title}</Link></Menu.Item>
         }
       })}
     </>
@@ -64,9 +67,8 @@ function BasicLayout(props: any) {
       </Sider>
       <Layout>
       <Header className={styles['site-layout-background']}>
-        <div>
           <UserHeader data={{user: 'zs'}}/>
-        </div>
+          <TagsView />
       </Header>
       <Content>
         <div style={{ background: '#fff',padding: 24,minHeight: 280 }}>
