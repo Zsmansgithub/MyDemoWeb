@@ -13,7 +13,7 @@ const routes = [
     { 
         path: '/',
         component: '@/layouts/index',
-        name: 'pyy-首页',
+        title: 'pyy-首页',
         routes: [
             ...dashboard,
             ...table,

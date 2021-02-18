@@ -28,7 +28,7 @@ const TagList: FC<PageProps> = ({ tagsview, dispatch }) => { // herocopy 为绑�
             {item.title}
           </Tag>)
       })}
-     </div>
+    </div>
   )
 }
 // conect 用于将model和视图关联起来 参数为model的namspace(本页面为herocopy) Hero为组件 组件内部接受state参数名称保持余namespace一致

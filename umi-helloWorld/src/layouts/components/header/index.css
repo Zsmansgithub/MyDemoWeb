@@ -1,11 +1,21 @@
 .wrapper {
   display: flex;
+  padding: 0 20px;
+}
+.wrapper > div {
+  flex: 1;
+}
+.breadcrumb {
+  padding: 12px 0;
+}
+.content {
+  display: flex;
   justify-content: flex-end;
   align-items: center;
   box-sizing: border-box;
   height: 48px;
 }
-.wrapper .avatar {
+.content .avatar {
   width: 24px;
   height: 24px;
   line-height: 24px;
@@ -14,12 +24,12 @@
   vertical-align: top;
   box-sizing: border-box;
 }
-.wrapper .text {
+.content .text {
   display: inline-block;
   font-size: 20px;
   box-sizing: border-box;
   vertical-align: middle;
-  height: 1px;
+  height: 0px;
   color: inherit;
   font-style: normal;
   line-height: 0;

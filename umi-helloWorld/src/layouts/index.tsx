@@ -36,22 +36,51 @@ function menuList(menus: any) {
     <>
       {menus.map((menu) => {
         if(menu.children?.length) {
-          return <SubMenu key={`sub_${menu.title}`} title={menu.title}>
+          return <SubMenu key={menu.title} title={menu.title}>
             {menuList(menu.children)}
           </SubMenu>
         } else {
-          return <Menu.Item key={`menu_${menu.path}`} onClick={() => addTag(menu)}><Link to={`${menu.path}`}>{menu.title}</Link></Menu.Item>
+          return <Menu.Item key={menu.path} onClick={() => addTag(menu)}><Link to={`${menu.path}`}>{menu.title}</Link></Menu.Item>
         }
       })}
     </>
   )
 }
 function BasicLayout(props: any) {
-  const location = props.location;
+  const { location } = props;
   const pathname = location.pathname;
   if(pathname === '/') {
     return <Redirect to="/dashboard" />
   }
+  const rootSubmenuKeys = ['dashboard', '基础表格'];
+  let rootName: string;
+  let activeMenu: any;
+  function findPathName(data: any, title: string) {
+    data.forEach((item: any) => {
+      if(item.path === pathname) {
+        rootName = title;
+        activeMenu = item;
+        return;
+      }
+      if(item.children) {
+        findPathName(item.children, title)
+      }
+    });
+  }
+  menuData.forEach((item) => {
+    const title = item.title;
+    if(!rootName) findPathName(item.children, title)
+  })
+  getDvaApp()._store.dispatch({type:"tagsview/addTags", payload: activeMenu})
+  const [openKeys, setOpenKeys] = React.useState([rootName]);
+  const onOpenChange = (keys: any) => {
+    const latestOpenKey = keys.find((key: string) => openKeys.indexOf(key) === -1);
+    if (rootSubmenuKeys.indexOf(latestOpenKey) === -1) {
+      setOpenKeys(keys);
+    } else {
+      setOpenKeys(latestOpenKey ? [latestOpenKey] : []);
+    }
+  };
   return (
     <Layout style={{height: '100%'}}>
       <Sider>
@@ -59,7 +88,9 @@ function BasicLayout(props: any) {
         <Menu
           theme="dark"
           mode="inline"
-          defaultSelectedKeys={[pathname]}
+          openKeys={openKeys}
+          onOpenChange={onOpenChange}
+          defaultSelectedKeys={pathname}
           style={{ lineHeight: '64px' }}
         >
           {menuList(menuData)}
@@ -67,7 +98,7 @@ function BasicLayout(props: any) {
       </Sider>
       <Layout>
       <Header className={styles['site-layout-background']}>
-          <UserHeader data={{user: 'zs'}}/>
+          <UserHeader data={{user: 'zs', pathname}}/>
           <TagsView />
       </Header>
       <Content>
