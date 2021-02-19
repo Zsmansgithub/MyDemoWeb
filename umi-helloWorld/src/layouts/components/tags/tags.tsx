@@ -21,7 +21,8 @@ const TagList: FC<PageProps> = ({ tagsview, dispatch }) => { // herocopy 为绑�
       {visitedViews.map((item, idx) => {
         const color = ((activeRoute === item.path) || (activeRoute === '/' && item.path === '/dashboard')) ? 'volcano' : 'green';
         return(<Tag closable={idx === 0 ? false  : true}
-        visible={true} key={item.path}
+        visible={true}
+        key={item.key}
         color={color}
         onClick={() => onClick(idx)}
         onClose={() => removeTags(idx)}>

@@ -20,7 +20,7 @@ const routes = [
         ]
     },
     {
-        component: './404',
+        component: '@/pages/404',
     },
 ]
 export default routes

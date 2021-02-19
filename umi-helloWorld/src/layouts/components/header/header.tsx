@@ -1,6 +1,7 @@
+import React from 'react';
 import { Menu, Dropdown, Avatar, Breadcrumb } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
-import breadcrumbData from  '@/utils/BreadcrumbData.js';
+import { breadcrumbData } from  '@/utils/tools.js';
 import styles from './index.less';
 const menuClick = ({ key }) => {
   console.log(key)
@@ -19,13 +20,12 @@ export default function UserHeader({ data }) {
   return (
     <div className={styles.wrapper}>
       <Breadcrumb className={styles.breadcrumb}>
-        {breadcrumbs.map(title => (<Breadcrumb.Item key={title}>{title}</Breadcrumb.Item>))}
+        {breadcrumbs.map((title: any) => (<Breadcrumb.Item key={title}>{title}</Breadcrumb.Item>))}
       </Breadcrumb>
       <div className={styles.content}>
           <Avatar icon={<UserOutlined />}  className={styles.avatar}/>
-          <Dropdown overlay={menu}  className={styles.text}>
-              {/* <span>{data.user}</span> */}
-              <span>Aa中</span>
+          <Dropdown arrow={true} overlay={menu} overlayStyle={{top: '-35px'}} className={styles.text}>
+              <span>{data.user}</span>
           </Dropdown>
       </div>
     </div>
