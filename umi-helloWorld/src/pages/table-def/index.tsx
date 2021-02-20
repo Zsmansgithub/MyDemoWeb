@@ -1,6 +1,12 @@
-import React from 'react';
+import React, { FC } from 'react';
+import { connect, ConnectProps } from 'umi';
+import { TableModelState } from './models/tabdef';
 import styles from './index.less';
 import { Table, Tag, Space, Pagination } from 'antd';
+import Demo from './components/search.tsx';
+interface PageProps extends ConnectProps {
+  data: TableModelState;
+}
 
 const columns = [
   {
@@ -75,11 +81,15 @@ const data = [
   },
 ];
 
-export default () => {
+const TableDef: FC<PageProps> = ({tableDef, dispatch}) => {
+  const { data } = tableDef;
   return (
     <div>
-      <Table columns={columns} dataSource={data} />
-      <Pagination defaultCurrent={6} total={500} />
+      <Demo query={tableDef.query}></Demo>
+      <Table columns={columns} dataSource={data.data} />
+      <Pagination defaultCurrent={1} total={data.total} />
     </div>
   );
 }
+
+export default connect(({ tableDef } : { tableDef: TableModelState }) => ({ tableDef }) )(TableDef)

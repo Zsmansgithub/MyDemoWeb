@@ -2,7 +2,7 @@ import { ResponseError } from 'umi-request';
 
 export const request = {
   // prefix: '/api',
-  // prefix: 'https://pvp.qq.com/api',
+//   prefix: 'https://pvp.qq.com/api',
   prefix: '/mockapi',
   headers: {
     Accept: 'application/json',
@@ -12,11 +12,3 @@ export const request = {
     console.error(error);
   }
 };
-// export const dva = {
-//   config: {
-//     onError(err) {
-//       err.preventDefault();
-//       console.error(err.message);
-//     },
-//   },
-// };
